@@ -48,7 +48,7 @@ function refreshTable(){
             
             let id = e.attr('friendsid');
             $('.modal-dialog').attr('friendsid',id);
-            $(document).on("click",".edit",function() {
+            $(this).on("click",".edit",function() {
               var elem = $("tr[friendsid='" + id +"']");
               var tr = $(this).closest('tr').closest('tbody').find(elem);
               tr.addClass('sampenih');

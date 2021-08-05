@@ -53,7 +53,7 @@ function refreshTable(){
             
             let id = e.attr('jemaatid');
             $('.modal-dialog').attr('JemaatID',id);
-            $(document).on("click",".edit",function() {
+            $(this).on("click",".edit",function() {
               var elem = $("tr[jemaatid='" + id +"']");
               var tr = $(this).closest('tr').closest('tbody').find(elem);
               tr.addClass('sampenih');
