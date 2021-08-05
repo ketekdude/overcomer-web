@@ -69,29 +69,7 @@ function refreshTable(){
         } )
         .on( 'draw', function () {
           // your code here
-          $('.rowData').click(function(e) { 
-            alert('test');
-            console.log('Pseudo :before element is clicked! Skipping click event');
-            if( $(e.target).closest('span').length==0 ){
-                //so clicked on pseudo :before element!
-                //do your work here ;)
-                console.log('Pseudo :before element is clicked! Skipping click event');
-                return;
-            }
-        
-            // The Responsive event handler still executes, 
-            // make sure to immediately click a second time to reopen or reclose the child.
-            // Causes this click event handler to run again but
-            // is stopped by the above if statement because the td is clicked
-            // not the <span>
-            $(this).click();
-            
-            // Execute event handler code.
-            
-            console.log('Processing click event');
-            
-    
-        });
+          
       });;
         
       }else{
