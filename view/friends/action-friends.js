@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 
-    let id = $('.modal-dialog').attr('FriendsID');
+    let id = $('.modal-dialog').attr('attr-id');
     if(id){
         refreshTable();
     }

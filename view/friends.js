@@ -34,30 +34,31 @@ function refreshTable(){
           $('.iFriendsName',e).text(item.FriendsName);
           $('.iAddress',e).text(item.Address);
           $('.iFriendsID',e).text(item.FriendsID);
-          e.attr('FriendsID',item.FriendsID);
+          e.attr('attr-id',item.FriendsID);
+          $('.edit',e).attr('attr-id',item.FriendsID);
           
           // $('.iAction',e).text('test');
           body.append(e);
-          // $('.edit',e).unbind('click').click(function(){
-          //   $('.modal-dialog').load('view/friends/action-friends.html');
-          //   let id = e.attr('friendsid');
-          //   $('.modal-dialog').attr('FriendsID',id);
-          // })
-          e.click(function() { 
-            // alert('test');
-            
-            let id = e.attr('friendsid');
-            $('.modal-dialog').attr('friendsid',id);
-            $(this).on("click",".edit",function() {
-              var elem = $("tr[friendsid='" + id +"']");
-              var tr = $(this).closest('tr').closest('tbody').find(elem);
-              tr.addClass('sampenih');
-              $('.modal-dialog').empty();
-              $('.modal-dialog').load('view/friends/action-friends.html');
-            });
-          });
+          //edit on web size
+          $('.edit',e).unbind('click').click(function(){
+            let id = e.attr('attr-id');
+            $('.modal-dialog').attr('attr-id',id);
+            $('.modal-dialog').load('view/friends/action-friends.html');
+          })
         
         }
+        //edit on responsive datatable size
+        $(document).on("click", ".dtr-control", function(){
+          let id = $(this).parent().attr('attr-id');
+          $(document).on("click",".edit[attr-id="+id+"]",function() {
+            var elem = $("tr[attr-id='" + id +"']");
+            var tr = $(this).closest('tr').closest('tbody').find(elem);
+            tr.addClass('sampenih');
+            $('.modal-dialog').empty();
+            $('.modal-dialog').attr('attr-id',id);
+            $('.modal-dialog').load('view/friends/action-friends.html');
+          });
+        })
         
         temp.remove();
         var table = $('#example').DataTable( {

@@ -38,31 +38,30 @@ function refreshTable(){
           $('.iFriendsName',e).text(item.FriendsName);
           $('.iPrivilegeCardNo',e).text(item.PrivilegeCardNo);
           $('.iJemaatID',e).text(item.JemaatID);
-          e.attr('jemaatid',item.JemaatID);
+          e.attr('attr-id',item.JemaatID);
+          $('.edit',e).attr('attr-id',item.JemaatID);
           
           // $('.iAction',e).text('test');
           body.append(e);
-          // $('.edit',e).unbind('click').click(function(){
-          //   $('.modal-dialog').load('view/congregration/action-congregration.html');
-          //   let id = e.attr('jemaatid');
-          //   $('.modal-dialog').attr('JemaatID',id);
-          // })
-          //for responsive data table, use this for the event listener.
-          e.click(function() { 
-            // alert('test');
-            
-            let id = e.attr('jemaatid');
-            $('.modal-dialog').attr('JemaatID',id);
-            $(this).on("click",".edit",function() {
-              var elem = $("tr[jemaatid='" + id +"']");
-              var tr = $(this).closest('tr').closest('tbody').find(elem);
-              tr.addClass('sampenih');
-              $('.modal-dialog').empty();
-              $('.modal-dialog').load('view/congregration/action-congregration.html');
-            });
-          });
+          $('.edit',e).unbind('click').click(function(){
+            let id = e.attr('attr-id');
+            $('.modal-dialog').attr('attr-id',id);
+            $('.modal-dialog').load('view/congregration/action-congregration.html');
+          })
+          
         }
-        
+        //for responsive data table, use this for the event listener.
+        $(document).on("click", ".dtr-control", function(){
+          let id = $(this).parent().attr('attr-id');
+          $(document).on("click",".edit[attr-id="+id+"]",function() {
+            var elem = $("tr[attr-id='" + id +"']");
+            var tr = $(this).closest('tr').closest('tbody').find(elem);
+            tr.addClass('sampenih');
+            $('.modal-dialog').empty();
+            $('.modal-dialog').attr('attr-id',id);
+            $('.modal-dialog').load('view/congregration/action-congregration.html');
+          });
+        })
         temp.remove();
         var table = $('#example').DataTable( {
           responsive: true,
