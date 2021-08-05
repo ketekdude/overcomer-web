@@ -38,12 +38,27 @@ function refreshTable(){
           
           // $('.iAction',e).text('test');
           body.append(e);
-          $('.edit',e).unbind('click').click(function(){
-            $('.modal-dialog').load('view/friends/action-friends.html');
+          // $('.edit',e).unbind('click').click(function(){
+          //   $('.modal-dialog').load('view/friends/action-friends.html');
+          //   let id = e.attr('friendsid');
+          //   $('.modal-dialog').attr('FriendsID',id);
+          // })
+          e.click(function() { 
+            // alert('test');
+            
             let id = e.attr('friendsid');
-            $('.modal-dialog').attr('FriendsID',id);
-          })
+            $('.modal-dialog').attr('friendsid',id);
+            $(document).on("click",".edit",function() {
+              var elem = $("tr[friendsid='" + id +"']");
+              var tr = $(this).closest('tr').closest('tbody').find(elem);
+              tr.addClass('sampenih');
+              $('.modal-dialog').empty();
+              $('.modal-dialog').load('view/friends/action-friends.html');
+            });
+          });
+        
         }
+        
         temp.remove();
         var table = $('#example').DataTable( {
           responsive: true,
