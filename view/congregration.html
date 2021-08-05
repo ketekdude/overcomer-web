@@ -1,0 +1,94 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="pageTitle"></h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Simple Tables</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">List Jemaat</h3>
+          </div>
+          <button type="button" class="col-md-1 btn btn-block btn-primary addBtn" data-toggle="modal" data-target="#modal-lg" style="margin:10px">Add</button>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="example" class="display nowrap responsive" style="width:100%">
+              <thead>
+                  <tr>
+                      <th>Nama</th>
+                      <th>Tanggal Lahir</th>
+                      <th>Telepon</th>
+                      <th>Email</th>
+                      <th>Privilege Card Number</th>
+                      <th>Friends</th>
+                      <th class="looptemplate"></th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              
+              <tbody class="bodyData">
+                <tr class="looptemplate rowtemplate">
+                    <td class="iFullName">Tiger</td>
+                    <td class="iDOB">System Architect</td>
+                    <td class="iPhone">Edinburgh</td>
+                    <td class="iEmail">61</td>
+                    <td class="iPrivilegeCardNo">2011/04/25</td>
+                    <td class="iFriendsName">Nixon</td>
+                    <td class="iJemaatID looptemplate"></td>
+                    <td class="iAction">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-default">Action</button>
+                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu" style="">
+                          <a class="dropdown-item edit" data-toggle="modal" data-target="#modal-lg">Edit</a>
+                          <a class="dropdown-item delete">Delete</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                      </div>
+
+                    </td>
+                    
+                </tr>
+              </tbody>
+          </table>
+          </div>
+          <!-- /.card-body -->
+          
+        <!-- /.card -->
+
+        
+      </div>
+      
+      
+    </div>
+    <div class="modal fade" id="modal-lg">
+      <div class="modal-dialog modal-lg">
+        
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+  
+
+   
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<script src="view/congregration.js"></script>
