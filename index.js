@@ -53,7 +53,7 @@ function initialURLLoad(){
       $('.content-wrapper').load(pageSelected);
 
   }
-  $("html, body").animate({ scrollTop: 0 }, "slow");
+  // $("html, body").animate({ scrollTop: 0 }, "slow");
   
   if(localStorage.getItem('Email') == null){
     window.location.href = config.baseUri+'login.html';
