@@ -2,6 +2,8 @@ $(document).ready(function(){
   let title = 'JEMAAT';
   $('.pageTitle').text(title);
 $('.addBtn').unbind('click').click(function(){
+  $('.modal-dialog').empty();
+  $('.modal-dialog').removeAttr('attr-id');
   $('.modal-dialog').load('view/congregration/action-congregration.html');
 })
 refreshTable();

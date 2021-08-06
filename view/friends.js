@@ -2,6 +2,8 @@ $(document).ready(function(){
 let title = 'FRIENDS';
 $('.pageTitle').text(title);
 $('.addBtn').unbind('click').click(function(){
+  $('.modal-dialog').empty();
+  $('.modal-dialog').removeAttr('attr-id');
   $('.modal-dialog').load('view/friends/action-friends.html');
 })
 refreshTable();
@@ -41,7 +43,9 @@ function refreshTable(){
           body.append(e);
           //edit on web size
           $('.edit',e).unbind('click').click(function(){
+            $('.modal-dialog').empty();
             let id = e.attr('attr-id');
+            console.log(id);
             $('.modal-dialog').attr('attr-id',id);
             $('.modal-dialog').load('view/friends/action-friends.html');
           })
