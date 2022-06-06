@@ -83,7 +83,8 @@ checkSession();
 // else{
 //   $('.login-button').css('display','none');
 // }
-    
+  
+//detect on changes url, check the session
 $(window).on('hashchange', function(e){
   initialURLLoad();
   // if(sessionStorage.getItem('email') == null)
