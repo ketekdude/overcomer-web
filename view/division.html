@@ -7,7 +7,7 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Friends</li>
+          <li class="breadcrumb-item active">Division</li>
         </ol>
       </div>
     </div>
@@ -21,7 +21,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">List Friends</h3>
+            <h3 class="card-title">List Division</h3>
           </div>
           <button type="button" class="col-md-1 col-3 btn btn-block btn-primary addBtn" data-toggle="modal" data-target="#modal-lg" style="margin:10px">Add</button>
           <!-- /.card-header -->
@@ -29,19 +29,21 @@
             <table id="example" class="display nowrap responsive" style="width:100%">
               <thead>
                   <tr>
-                      <th hidden>FriendsID</th>
+                      <th hidden>DivisionID</th>
                       <th>Nama</th>
-                      <th>Alamat</th>
-                      <th>Friends Leader</th>
+                      <th>Deskripsi</th>
+                      <th hidden>HeadDivisionID</th>
+                      <th>Kadiv</th>
                       <th>Action</th>
                   </tr>
               </thead>
               
               <tbody class="bodyData">
                 <tr class="looptemplate rowtemplate">
-                    <td class="iFriendsID" hidden></td>
-                    <td class="iFriendsName">Tiger</td>
-                    <td class="iAddress">System Architect</td>
+                    <td class="iDivisionID" hidden></td>
+                    <td class="iDivisionName">Tiger</td>
+                    <td class="iDescription">System Architect</td>
+                    <td class="iHeadDivisionID" hidden>Edinburgh</td>
                     <td class="iFullName">Edinburgh</td>
                     <td class="iAction">
                       <div class="btn-group">
@@ -85,4 +87,4 @@
     <!-- /.row -->
   </div><!-- /.container-fluid -->
 </section>
-<script src="view/friends.js"></script>
+<script src="view/division.js"></script>
