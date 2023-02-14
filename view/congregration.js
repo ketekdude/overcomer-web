@@ -12,36 +12,36 @@ function refreshTable(){
   obj.Token = localStorage.getItem('Email');
   var json = JSON.stringify(obj);
   $.ajax({
-    url: config.serviceUri+'get_jemaat',
-    type: "POST",
+    url: config.serviceUri+'member',
+    type: "GET",
     processData: false,
-    contentType: "application/json; charset=UTF-8",
-    data: json, 
+    headers:  {"token": localStorage.getItem("Token"), "user_id": localStorage.getItem("UserID")},
+    contentType: "application/json",
     beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
       $('#loader').removeClass('hidden')
     },
     success: function(data){
-      var result = JSON.parse(data);
+      var result = data
       
       $('#example').DataTable().destroy();
       var a = "TEST";
-      if(result.Status == 0){
-        let data = result.Data;
+      if(result.message == "success"){
+        let data = result.Data
         var body = $('.bodyData');
         var temp = $('.rowtemplate');
         for(let i = 0; i<data.length;i++){
           let e = temp.clone();
           let item = data[i];
           e.removeClass('rowTemplate').removeClass('looptemplate').addClass('rowData');
-          $('.iFullName',e).text(item.FullName);
-          $('.iDOB',e).text(item.DOB);
-          $('.iPhone',e).text(item.Phone);
-          $('.iEmail',e).text(item.Email);
-          $('.iFriendsName',e).text(item.FriendsName);
-          $('.iPrivilegeCardNo',e).text(item.PrivilegeCardNo);
-          $('.iJemaatID',e).text(item.JemaatID);
-          e.attr('attr-id',item.JemaatID);
-          $('.edit',e).attr('attr-id',item.JemaatID);
+          $('.iFullName',e).text(item.first_name+' '+item.last_name);
+          $('.iDOB',e).text(item.dob);
+          $('.iPhone',e).text(item.mobile_phone);
+          // $('.iEmail',e).text(item.Email);
+          // $('.iFriendsName',e).text(item.FriendsName);
+          // $('.iPrivilegeCardNo',e).text(item.PrivilegeCardNo);
+          $('.iJemaatID',e).text(item.id);
+          e.attr('attr-id',item.id);
+          $('.edit',e).attr('attr-id',item.id);
           
           // $('.iAction',e).text('test');
           body.append(e);

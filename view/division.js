@@ -35,9 +35,9 @@ function refreshTable(){
           $('.iFullName',e).text(item.FullName);
           $('.iDivisionName',e).text(item.DivisionName);
           $('.iDescription',e).text(item.Description);
-          $('.iFriendsID',e).text(item.FriendsID);
-          e.attr('attr-id',item.FriendsID);
-          $('.edit',e).attr('attr-id',item.FriendsID);
+          $('.iDivisionID',e).text(item.DivisionID);
+          e.attr('attr-id',item.DivisionID);
+          $('.edit',e).attr('attr-id',item.DivisionID);
           
           // $('.iAction',e).text('test');
           body.append(e);
@@ -54,12 +54,12 @@ function refreshTable(){
             if (confirm('Are you sure you want to delete this data ?')) {
               // Save it!
               var param = {};
-              param.FriendsID = $('.iFriendsID',e).text();
+              param.DivisionID = $('.iDivisionID',e).text();
               param.Token = obj.Token;
               let json = JSON.stringify(param);
-              alert(param.FriendsID)
+              alert(param.DivisionID)
               $.ajax({
-                url: config.serviceUri+'delete_friends',
+                url: config.serviceUri+'delete_division',
                 type: "POST",
                 processData: false,
                 contentType: "application/json; charset=UTF-8",
