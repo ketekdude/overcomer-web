@@ -21,7 +21,7 @@ $(function () {
     success: function(data){
       var labels = []
       data.Data.ChartData.forEach(function(item){
-        labels.push(item.name)
+        labels.push(item.name+': '+item.count)
         if (item.name == "XO") {
           $(".xo-count").text(item.count)
         }else if (item.name == "Family Service"){
@@ -52,7 +52,7 @@ $(function () {
     },
     title: {
       display: true,
-      text: "All Member Count"
+      text: "All Member Count: "+data.Data.Total
     },  
     plugins: {
       datalabels: {

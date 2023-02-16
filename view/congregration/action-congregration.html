@@ -16,31 +16,54 @@
             <form role="form" id="action" action="#" method="post">
               <div class="card-body row">
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Nama Lengkap</label>
-                        <input type="text"autocomplete="off" name="FullName" class="form-control" id="FullName" placeholder="Nama Lengkap">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Nama Depan</label>
+                        <input type="text"autocomplete="off" name="FirstName" class="form-control" id="FirstName" placeholder="Nama Depan">
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputPassword1">Telepon</label>
-                        <input type="text" autocomplete="off" class="form-control" id="Phone" name="Phone" placeholder="Telepon">
+                        <label for="exampleInputEmail1">Nama Belakang</label>
+                        <input type="text"autocomplete="off" name="LastName" class="form-control" id="LastName" placeholder="Nama Belakang">
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputPassword1">Email</label>
-                        <input type="text" autocomplete="off" class="form-control" id="Email" name="Email" placeholder="Email">
+                        <label>Gender</label>
+                        <select id="Gender" name="Gender" class="form-control select2  select2bs4" style="width: 100%;">
+                          <option value="">Please Select</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Alamat</label>
-                        <textarea style="max-width:95%;" class="form-control" name="Address" id="Address">
-                            </textarea>
+                        <label>Date:</label>
+                          <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                              <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                              <div class="input-group-append date-picker" data-target="#reservationdate" data-toggle="datetimepicker">
+                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                              </div>
+                          </div>
                       </div>
+                      <div class="form-group">
+                        <label>Segment</label>
+                        <select id="FriendsID" name="FriendsID" class="form-control select2  select2bs4" style="width: 100%;">
+                          <option value="">Please Select</option>
+                        </select>
+                      </div>
+                      
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Friends</label>
-                    <select id="FriendsID" name="FriendsID" class="form-control select2  select2bs4" style="width: 100%;">
-                      <option value="">Please Select</option>
-                    </select>
-                  </div>  
+                    <label for="exampleInputPassword1">Telepon</label>
+                    <input type="text" autocomplete="off" class="form-control" id="Phone" name="Phone" placeholder="Telepon">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Akun Instagram</label>
+                    <input type="text" autocomplete="off" class="form-control" id="Email" name="Email" placeholder="Email">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Alamat</label>
+                    <textarea style="max-width:95%;" class="form-control" name="Address" id="Address">
+                        </textarea>
+                  </div>
+                  
                     <!-- <div class="form-group">
                         <label for="exampleInputFile">File input</label>
                         <div class="input-group">
@@ -56,10 +79,10 @@
                 </div>
                 
                 
-                <div class="form-check">
+                <!-- <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="exampleCheck1">
                   <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
+                </div> -->
               </div>
               <!-- /.card-body -->
 

@@ -34,7 +34,8 @@ function refreshTable(){
           let item = data[i];
           e.removeClass('rowTemplate').removeClass('looptemplate').addClass('rowData');
           $('.iFullName',e).text(item.first_name+' '+item.last_name);
-          $('.iDOB',e).text(item.dob);
+          var DOB = (new Date()).toISOString().split('T')[0];
+          $('.iDOB',e).text(DOB);
           $('.iPhone',e).text(item.mobile_phone);
           // $('.iEmail',e).text(item.Email);
           // $('.iFriendsName',e).text(item.FriendsName);

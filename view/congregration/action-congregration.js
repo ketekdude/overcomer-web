@@ -1,10 +1,17 @@
 $(document).ready(function(){
-
     let ajaxCount = 0;
     var obj = {};
     obj.Token = localStorage.getItem('Email');
     let id = $('.modal-dialog').attr('attr-id');
     $('.select2').select2()
+
+    //Date picker
+    $('#reservationdate').datetimepicker({
+      format: 'L'
+    });
+    $('.datetimepicker-input').on('click', function(){
+      $('.fa-calendar').trigger('click')
+    })
 
     //Initialize Select2 Elements
     $('.select2bs4').select2({
@@ -136,28 +143,28 @@ $(document).ready(function(){
       }
 
       function getFriends(obj){
-        var json = JSON.stringify(obj);
         $.ajax({
-          url: config.serviceUri+'get_friends',
-          type: "POST",
+          url: config.serviceUri+'segment',
+          type: "GET",
           processData: false,
           contentType: "application/json; charset=UTF-8",
-          data: json, 
+          headers:  {"token": localStorage.getItem("Token"), "user_id": localStorage.getItem("UserID")},
           beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
             $('#loader').css('z-index',10000).removeClass('hidden')
             ajaxCount++;
           },
           success: function(data){
-            var result = JSON.parse(data);
+            // var result = JSON.parse(data);
+            var result = data
             $('#FriendsID').empty();
-            if(result.Status == 0){
+            if(result.message == "success"){
               let data = result.Data;
               
               let opt = $('<option></option>').attr('value', "").text('Please Select');
                 $('#FriendsID').append(opt);
               for(let i = 0;i<data.length;i++){
                 let item = data[i];
-                let opt = $('<option></option>').attr('value', item.FriendsID).text(item.FriendsName);
+                let opt = $('<option></option>').attr('value', item.id).text(item.name);
                 $('#FriendsID').append(opt);
               }
             }else{
