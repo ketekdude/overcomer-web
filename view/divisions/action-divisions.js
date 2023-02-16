@@ -1,28 +1,21 @@
 $(document).ready(function(){
+
+
+    let id = $('.modal-dialog').attr('attr-id');
     let ajaxCount = 0;
     var obj = {};
     obj.Token = localStorage.getItem('Email');
-    let id = $('.modal-dialog').attr('attr-id');
     $('.select2').select2()
-
-    //Date picker
-    $('#reservationdate').datetimepicker({
-      format: 'L'
-    });
-    $('.datetimepicker-input').on('click', function(){
-      $('.fa-calendar').trigger('click')
-    })
 
     //Initialize Select2 Elements
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     })
     if(id){
-      refreshTable(obj);
+        refreshTable(obj);
     }else{
-      getFriends(obj);
+        getFriendsLeader(obj);
     }
-    
     $("#action").unbind('submit').submit(function(event){
       var ser = $('form').serializeArray();
       var param = {};
@@ -31,12 +24,11 @@ $(document).ready(function(){
         param[value.name] = value.value;
       })
       param['Token'] = obj.Token;
-      param['JemaatID'] = id;
+      param['FriendsID'] = id;
       console.log(param);
       let json = JSON.stringify(param);
-      console.log(json);
       $.ajax({
-        url: config.serviceUri+'save_jemaat',
+        url: config.serviceUri+'save_friends',
         type: "POST",
         processData: false,
         contentType: "application/json; charset=UTF-8",
@@ -67,10 +59,11 @@ $(document).ready(function(){
       
     });
     function refreshTable(obj){
-        obj.JemaatID = id;
+        
+        obj.FriendsID = id;
         var json = JSON.stringify(obj);
         $.ajax({
-          url: config.serviceUri+'get_jemaat',
+          url: config.serviceUri+'get_friends',
           type: "POST",
           processData: false,
           contentType: "application/json; charset=UTF-8",
@@ -84,12 +77,9 @@ $(document).ready(function(){
             if(result.Status == 0){
               let item = result.Data;
 
-              $('#FullName').val(item.FullName);
-              $('#Phone').val(item.Phone);
-              $('#Email').val(item.Email);
-              $('#Address').val(item.Address);
+              $('#FullName').val(item.FriendsName);
               $.ajax({
-                url: config.serviceUri+'get_friends',
+                url: config.serviceUri+'get_jemaat',
                 type: "POST",
                 processData: false,
                 contentType: "application/json; charset=UTF-8",
@@ -100,18 +90,18 @@ $(document).ready(function(){
                 },
                 success: function(data){
                   var result = JSON.parse(data);
-                  $('#FriendsID').empty();
+                  $('#FriendsLeaderID').empty();
                   if(result.Status == 0){
                     let data = result.Data;
                     
                     let opt = $('<option></option>').attr('value', "").text('Please Select');
-                      $('#FriendsID').append(opt);
+                      $('#FriendsLeaderID').append(opt);
                     for(let i = 0;i<data.length;i++){
                       let item = data[i];
-                      let opt = $('<option></option>').attr('value', item.FriendsID).text(item.FriendsName);
-                      $('#FriendsID').append(opt);
+                      let opt = $('<option></option>').attr('value', item.JemaatID).text(item.FullName);
+                      $('#FriendsLeaderID').append(opt);
                     }
-                    $('#FriendsID').val(item.FriendsID);
+                    $('#FriendsLeaderID').val(item.FriendsLeaderID);
                   }else{
             
                   }
@@ -126,14 +116,18 @@ $(document).ready(function(){
                     
                 }
               });
+              $('#Phone').val(item.Phone);
+              $('#Email').val(item.Email);
+              $('#Address').val(item.Address);
               
             }else{
       
             }
           },complete: function () { // Set our complete callback, adding the .hidden class and hiding the spinner.
             ajaxCount--;
+            console.log(ajaxCount);
             if(ajaxCount == 0)
-              $('#loader').addClass('hidden')
+                $('#loader').addClass('hidden')
           },
           error:function(result){
             // console.log(result.responseText)
@@ -142,31 +136,32 @@ $(document).ready(function(){
         });
       }
 
-      function getFriends(obj){
+      function getFriendsLeader(obj){
+        var json = JSON.stringify(obj);
         $.ajax({
-          url: config.serviceUri+'segment',
-          type: "GET",
+          url: config.serviceUri+'get_jemaat',
+          type: "POST",
           processData: false,
           contentType: "application/json; charset=UTF-8",
-          headers:  {"token": localStorage.getItem("Token"), "user_id": localStorage.getItem("UserID")},
+          data: json, 
           beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
             $('#loader').css('z-index',10000).removeClass('hidden')
             ajaxCount++;
           },
           success: function(data){
-            // var result = JSON.parse(data);
-            var result = data
-            $('#FriendsID').empty();
-            if(result.message == "success"){
+            var result = JSON.parse(data);
+            $('#FriendsLeaderID').empty();
+            if(result.Status == 0){
               let data = result.Data;
               
               let opt = $('<option></option>').attr('value', "").text('Please Select');
-                $('#FriendsID').append(opt);
+                $('#FriendsLeaderID').append(opt);
               for(let i = 0;i<data.length;i++){
                 let item = data[i];
-                let opt = $('<option></option>').attr('value', item.id).text(item.name);
-                $('#FriendsID').append(opt);
+                let opt = $('<option></option>').attr('value', item.JemaatID).text(item.FullName);
+                $('#FriendsLeaderID').append(opt);
               }
+              
             }else{
       
             }

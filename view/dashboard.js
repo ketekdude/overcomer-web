@@ -9,7 +9,87 @@
 
 $(function () {
   'use strict'
+  $.ajax({
+    url: config.serviceUri+'dashboard/pie',
+    type: "GET",
+    processData: false,
+    contentType: "application/json; charset=UTF-8",
+    headers:  {"token": localStorage.getItem("Token"), "user_id": localStorage.getItem("UserID")},
+    beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
+      $('#loader').removeClass('hidden')
+    },
+    success: function(data){
+      var labels = []
+      data.Data.ChartData.forEach(function(item){
+        labels.push(item.name+': '+item.count)
+        if (item.name == "XO") {
+          $(".xo-count").text(item.count)
+        }else if (item.name == "Family Service"){
+          $(".fs-count").text(item.count)
+        }
 
+      })
+  
+      // Donut Chart
+  var pieChartCanvas = $('#sales-chart-canvas').get(0).getContext('2d')
+  var pieData = {
+    labels: labels,
+    datasets: [
+      {
+        data: [30, 12, 20],
+        backgroundColor: ['#f56954', '#00a65a', '#f39c12']
+      }
+    ]
+  }
+  var pieOptions = {
+    legend: {
+      display: true
+    },
+    maintainAspectRatio: false,
+    responsive: true,
+    tooltip: {
+      enabled: true
+    },
+    title: {
+      display: true,
+      text: "All Member Count: "+data.Data.Total
+    },  
+    plugins: {
+      datalabels: {
+        display: true,
+        align: 'bottom',
+        backgroundColor: '#ccc',
+        borderRadius: 3,
+        font: {
+          size: 18,
+        },
+      },
+    },
+  }
+  // Create pie or douhnut chart
+  // You can switch between pie and douhnut using the method below.
+  // eslint-disable-next-line no-unused-vars
+  var pieChart = new Chart(pieChartCanvas, { // lgtm[js/unused-local-variable]
+    type: 'pie',
+    data: pieData,
+    options: pieOptions
+  })
+      
+      
+    },complete: function () { // Set our complete callback, adding the .hidden class and hiding the spinner.
+      $('#loader').addClass('hidden')
+    },
+    error:function(result){
+      // console.log(result.responseText)
+      alert('something is error, contact ko Marshel');
+      $('#example').DataTable().destroy();
+      $('.looptemplate').remove();
+        var table = $('#example').DataTable( {
+          "scrollX": true,
+          responsive: true
+        } );
+    }
+  });
   // Make the dashboard widgets sortable Using jquery UI
   $('.connectedSortable').sortable({
     placeholder: 'sort-highlight',
@@ -264,4 +344,8 @@ $(function () {
     data: salesGraphChartData,
     options: salesGraphChartOptions
   })
+
+  
+
+
 })

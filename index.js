@@ -13,8 +13,8 @@ $('.sign-out-button').unbind('click').click(function(){
   localStorage.clear();
 })
 function initialURLLoad(){
-  if(localStorage.getItem('Email')){
-    $('.UserFullName').text(localStorage.getItem('FullName'));
+  if(localStorage.getItem('FirstName')){
+    $('.UserFullName').text(localStorage.getItem('FirstName') + ' '+localStorage.getItem('LastName'));
   }
   $('.nav-link').removeClass('active');
   var url      = window.location.href;
@@ -34,7 +34,9 @@ function initialURLLoad(){
     let pageName = firstPage.attr('parent');
     $('.nav-link-'+pageName).addClass('active');
     
-    $('.content-wrapper').load('view/dashboard.html');
+    // $('.content-wrapper').load('view/dashboard.html');
+    window.location.href = config.baseUri+'index.html#view/dashboard.html';
+    
   }else{
     
     $('.nav-link').removeClass('active');
@@ -98,16 +100,42 @@ $('.login-button').click(function(){
 });
 
 $('.logout-button').click(function(){
-  sessionStorage.clear();
-  $('#primarycontent').load('login.html');
-  console.log(sessionStorage.getItem('email'));
-  if(sessionStorage.getItem('email') == null){
-    $('.logout-button').css('display','none');
-    $('.login-button').css('display','');
-  }
-  else{
-    $('.login-button').css('display','none');
-  }
+  $.ajax({
+    url: config.serviceUri+'logout',
+    headers: {
+      "token":sessionStorage.getItem("Token"),
+      "user_id":sessionStorage.getItem("UserID")
+    },
+    type: "GET",
+    data: JSON.stringify(obj), 
+    processData: false,
+    contentType: "application/json",
+    beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
+      $('#loader').removeClass('hidden')
+    },
+    success: function(data){
+      // var result = JSON.parse(data);
+      alert(data)
+      console.log(data)
+      sessionStorage.clear();
+      $('#primarycontent').load('login.html');
+      console.log(sessionStorage.getItem('email'));
+      if(sessionStorage.getItem('email') == null){
+        $('.logout-button').css('display','none');
+        $('.login-button').css('display','');
+      }
+      else{
+        $('.login-button').css('display','none');
+      }
+      
+    },complete: function () { // Set our complete callback, adding the .hidden class and hiding the spinner.
+      $('#loader').addClass('hidden')
+    },
+    error:function(result){
+      console.log(result.responseText)
+    }
+  });
+  
 });
 
 // $('.nav-link-page').click(function(){
