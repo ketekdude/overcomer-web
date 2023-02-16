@@ -34,7 +34,9 @@ function initialURLLoad(){
     let pageName = firstPage.attr('parent');
     $('.nav-link-'+pageName).addClass('active');
     
-    $('.content-wrapper').load('view/dashboard.html');
+    // $('.content-wrapper').load('view/dashboard.html');
+    window.location.href = config.baseUri+'index.html#view/dashboard.html';
+    
   }else{
     
     $('.nav-link').removeClass('active');
